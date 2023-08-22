@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>generate normal code</title>
+<style>
+	textarea{
+		width: 560px;
+		height: 560px;
+	}
+</style>
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+	function generate(){
+		if(!navigator.clipboard){
+			console.log("sorry.");
+			return;
+		}
+		var textIn = $("#textIn").val();
+		console.log(textIn);
+		
+		navigator.clipboard.writeText(textIn)
+			.then(result =>{
+				
+				var find = "package";
+				var find2 = ";";
+				if(textIn.includes(find)&&textIn.includes(find2)){
+					found = textIn.substring(textIn.indexOf(find2)+1);
+					navigator.clipboard.writeText(found)
+					$('#fontOut').html("<font color = 'blue'>클립보드에 복사 성공!</font><br><pre>"+found+"</pre>");
+				}
+				else{
+					$('#fontOut').html("<font color = 'green'> there are no 'package' in your code. </font><br><pre>"+textIn+"</pre>");
+					
+				}
+				
+				
+			})
+			.catch(error =>{
+				console.log("error occured.", error)
+			});
+		
+		 
+	}
+	
+	function refresh(){
+		location.reload();
+	}
+
+
+
+</script>
+</head>
+<body>
+	<h1>패키지를 빼주세요</h1>
+	<div>
+		<textarea id = "textIn" placeholder = "코드 여기에 붙여넣기"></textarea>
+		<br>
+		<button type = "button" onclick = "generate();">빼줘</button>
+		<button type = "reset" onclick = "refresh();">다시</button> 
+	</div>
+	
+	<br><br>
+	<div id = "fontOut">
+	</div>
+</body>
+</html>

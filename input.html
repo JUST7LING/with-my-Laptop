@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	table{
+		border-collapse: collapse;
+	}
+	tr, th, td{
+		padding: 10px;
+	}
+	#btn{
+		text-align: center;
+	}
+	
+</style>
+</head>
+<body>
+	<form method = "get" action = "http://localhost:8080/testServlet/CalcServlet">
+	<table border = '1'>
+		<tr>
+			<th>X</th>
+			<td><input type = "text" name = "inputX"></td>
+		</tr>
+		<tr>
+			<th>Y</th>
+			<td><input type = "text" name = "inputY"></td>
+		</tr>
+		<tr>
+			<td colspan = '2' id = "btn">
+				<input type = "submit" value = "계산" onclick = "check()">
+				<input type = "reset" value = "취소">
+			</td>
+		</tr>
+	</table>
+	</form>
+	<div id = "status"></div>
+	<script>
+		function check(){
+			var valueX = document.getElementById("inputX").value;
+			var valueY = document.getElementById("inputY").value;
+			
+			if(valueX.length==0){
+				document.getElementById("status").innerHTML = '<font color = "red">please Enter X value.</font>'
+				return false;
+			}
+			else if(valueY.length==0){
+				
+				document.getElementById("status").innerHTML = '<font color = "red">please Enter Y value.</font>';
+			 	
+				return false;
+			}
+			else{
+				
+				document.getElementById("status").innerHTML = '<font color = "green">please wait .... </font>';
+				 
+			}
+			
+		}
+	
+	
+	</script>
+</body>
+</html>
